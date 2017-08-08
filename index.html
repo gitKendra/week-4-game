@@ -30,7 +30,7 @@
 		<div class="row main-content">
 			
 			<!-- Horizontal Panel For Battlefield -->
-			<div class="col-md-12 hidden" id="battlefield">
+			<div class="col-md-12 hidden" id="game-board">
 				<div class="panel panel-default panel-horizontal">
 					
 					<!-- Attacker -->
@@ -53,14 +53,16 @@
 					</div>
 
 					<!-- Battle Stats -->
-					<div class="panel-body" id="battle-stats">
-						<p>Battle stats will be here</p>
+					<div class="panel-body" id="battlefield">
+						<h3 id="stats-title">Battlefield</h3>
+						<div id="attack-btn"></div>
+						<p id="battle-stats">Battle stats will be here</p>
 					</div>
 
 					<!-- Defender -->
-					<div class="panel-footer defender">
+					<div class="panel-footer" id="defend-panel">
 						<h3 id="defend-name">Defender</h3>
-						<div class="img-responsive" id="defend-img"></div>
+						<div class="active-player" id="defend-img"></div>
 						<!-- Stats Table -->
 						<table class="table hidden" id="defender-stats">
 							<tr>

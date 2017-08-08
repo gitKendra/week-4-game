@@ -18,11 +18,7 @@
 	width: 25%;
 }
 
-.active-player {
-	width: 100%;
-}
 .thumbnail {
-	float: left;
 	width: 150px;
 	height: 200px;
 	margin-right: 10px;
@@ -32,9 +28,23 @@
 	margin-right: 0;
 }
 
+#opponent-panel img {
+	float: left;
+}
+
 #attack-panel {
 	background-color: oldlace;
 }
-.defender {
+
+#defend-panel {
 	background-color: aliceblue;
 }
+
+.active-player img {
+	margin: auto;
+	margin-bottom: 20px;
+}
+#battle-stats {
+	margin-top: 20px;
+}
+
