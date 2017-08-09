@@ -18,7 +18,7 @@ $(document).ready(function() {
 		ap: 6,
 		cap: 9,
 		type: "opponent",
-		action: " throws fire at ",
+		action: " breathes fire at ",
 		pic: "assets/images/bowser.png"
 	};
 
@@ -62,6 +62,9 @@ $(document).ready(function() {
 	// Place opponents on opponent panel
 	printOpponents();
 
+
+	// On-click events \\
+
 	// Select Players
 	$(".player-image").on("click", function(){
 		var tempPlayer = this;
@@ -72,6 +75,8 @@ $(document).ready(function() {
 		if (attackerSet && defenderSet) {
 			return;
 		}
+
+		// Choose a defender
 		else if (attackerSet && !defenderSet){
 			// Set defender variables
 			defenderSet = true;
@@ -96,6 +101,8 @@ $(document).ready(function() {
 			// Turn off onclick functionality
 			$(this).off();
 		}
+
+		// Choose attacker
 		else { 
 			// Set attacker variables
 			attackerSet = true;
@@ -110,47 +117,53 @@ $(document).ready(function() {
 			$("#battle-stats").html("Choose an opponent.");
 			$("#opponent-title").html("Opponents");	
 			$("#game-board").removeClass("hidden");
-
 			
 			// Turn off onlcick functionality
 			$(this).off();
 		}
 	});
 
-	// Attack defender
+	// Attack Button
 	$("#attack-btn").on("click", function(){
 		// Attack opponent
+		$("#battle-stats").html(player[attacker].name+player[attacker].action+player[defender].name+".");
 		player[defender].hp -= player[attacker].ap;
 		printDefenderStats();
+
+		// You defeated the opponent
 		if(player[defender].hp <= 0) {
-			// You defeated the opponent
+			$("#battle-stats").html("You defeated "+ player[defender].name+"!</br>");
 			numOpponents --;
 			player[attacker].ap += numAttack;
 			printAttackerStats();
+
+			// Choose another opponent
 			if(numOpponents > 0){
-				// Choose another opponent
 				defenderSet = false;
 				$("#attack-btn").empty();
-				// update html to choose another player
-				$("#battle-stats").html("Choose your next opponent");
+				$("#battle-stats").append("Choose your next opponent below.");
 			}
+			// All opponents defeated
 			else {
-				// You defeated all opponents. You win!
-				$("#battlefield").html("<h3>You win!</h3>");
+				var audio = new Audio("../sounds/smb_world_clear.wav");
+				audio.play();
+				$("#battlefield").html("<h1>You win!</h1>");
 			}
 		}
+
+		// Counter-Attack
 		else {
-			// Counter-Attack
+			$("#battle-stats").append("<br>"+player[defender].name+" counters and "+player[defender].action+player[attacker].name+".");
 			player[attacker].hp -= player[defender].cap;
 			player[attacker].ap += numAttack;
 			printAttackerStats();
+
+			// Game over.
 			if (player[attacker].hp <= 0) {
-				// You died. Game over
-				$("#battlefield").html("<h3>Game over!</h3>");
+				$("#battlefield").html("<h1>Game over!</h1>");
 			}
 		}
 	});
-
 
 	 // FUNCTIONS \\
 
@@ -159,11 +172,13 @@ $(document).ready(function() {
 		$("#attack-hp").html(player[attacker].hp);
 		$("#attack-ap").html(player[attacker].ap);
 	}
+
 	// prints the defender stats to html
 	function printDefenderStats(){
 		$("#defend-hp").html(player[defender].hp);
 		$("#defend-ap").html(player[defender].cap);
 	}
+
 	// prints the opponent field
 	function printOpponents(){
 		opponentPanel.empty();
@@ -176,19 +191,5 @@ $(document).ready(function() {
 				opponentPanel.append(image);
 			}
 		}
-	}
-
-
-	// Creates a Panel header and body and assigns the title of the panel header and the id tag
-	function createPanel(title, titleIdName, bodyIdName){
-		var panel = 
-			"<div class=\"panel panel-default\">" +
-			  "<div class=\"panel-heading\">" +
-			    "<h3 class=\"panel-title id=" + titleIdName +">" + title + "</h3>" +
-			  "</div>" +
-			  "<div class=\"panel-body id=" + bodyIdName + "></div>" +
-			"</div>"
-		;
-		return panel;
 	}
 });

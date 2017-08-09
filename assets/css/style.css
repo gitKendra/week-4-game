@@ -1,4 +1,13 @@
-/* Battlefield */
+body {
+	font-family: 'VT323', monospace;
+	font-size: 2em;
+}
+
+footer {
+	text-align: center;
+}
+
+/* Horizontal battlefield */
 .panel-horizontal {
 	width: 100%;
 	display: table;
@@ -18,16 +27,21 @@
 	width: 25%;
 }
 
+/* Player cards */
 .thumbnail {
 	width: 150px;
 	height: 200px;
+	min-width: 150px;
+	min-height: 200px;
 	margin-right: 10px;
+	border: solid 2px lightgrey;
 }
 
 .thumbnail:last-child {
 	margin-right: 0;
 }
 
+/* Battle panels */
 #opponent-panel img {
 	float: left;
 }
@@ -44,7 +58,20 @@
 	margin: auto;
 	margin-bottom: 20px;
 }
-#battle-stats {
-	margin-top: 20px;
+
+#battlefield {
+	position: relative;
+	background-image: url(../images/sky_brick_bg.png);
+	background-size: cover;
 }
 
+#battle-stats {
+	position: absolute;
+	bottom: 60px;
+	width: 100%;
+}
+
+#attack-btn {
+	position: relative;
+    top: 80px;
+}
